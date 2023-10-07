@@ -1,0 +1,70 @@
+@import "./fonts/eustache/style.scss";
+@import "./fonts/gordita/style.scss";
+@import "./fonts/noteworthy/style.scss";
+@import "./fonts/recoleta/style.scss";
+@import "./fonts/bootstrap-icons/font-css.scss";
+@import "./fonts/font-awesome/css/all.min.scss";
+
+// main css
+@import "./scss/custom-animation";
+@import "./scss/framework";
+@import "./scss/navbar";
+@import "./scss/style";
+@import "./scss/custom-next";
+@import "./scss/responsive";
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    display: none;
+}
+
+}
+
+.theme-main-menu .logo {display: block;}
+.card-style-fifteen img {display: none !important;}
+.card-style-fifteen {height: 269px;}
+.social-media-fix {width: 80px;}
+.partner-section-two .logo-wrapper .logo:nth-child(7) {background: none !important;}
+.partner-section-two .logo-wrapper .logo { border-radius: 50%; margin: 12px 3%; }
+.partner-section-two .logo-wrapper {right: 3%;}
+.footer-style-nine {padding: 0;}
+
+.unique-fix {}
+
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  
+  
+  .social-wrapper {
+    padding: 30px 50px;
+  }
+  
+  .social {
+    display: inline-block;
+    margin: 0 15px;
+    transition: transform 0.05s;
+  }
+  
+  .social:hover {
+    transform: scale(1.1);
+  }
+  
+  .youtube {
+    color: #c4302b;
+  }
+  
+  .twitter {
+    color: dodgerblue;
+  }
+  
+  .instagram {
+    color: #cd486b;
+  }
+  
+  .github {
+    color: #000;
+  }
