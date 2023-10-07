@@ -5,7 +5,6 @@ import CallToActions from "../../components/home-page/CallToActions";
 import Counter from "../../components/home-page/Counter";
 import CopyrightFooter from "../../components/home-page/CopyrightFooter";
 
-
 import DefaulHeader from "../../components/header/DefaulHeader";
 import AppBanner from "../../components/home-page/AppBanner";
 import Block from "../../components/home-page/Block";
