@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const AppBanner = () => {
   const features = [
     "Same-day ordering through our website.",
@@ -46,25 +48,34 @@ const AppBanner = () => {
 
       <div className="col-lg-6 wow fadeInRight">
         <div className="illustration-holder position-relative pt-50 pb-50 pe-md-5 lg-mt-80">
-          <img
-            src="images/media/mobile-app-order-p2.png"
-            alt=""
+          <Image
+            src="/images/media/mobile-app-order-p2.png"
+            alt="mobile ordering screenshot"
             className="lazy-img main-img ms-auto"
+            width="200"
+            height="402"
           />
-          <img
-            src="images/media/mobile-app-order-p1.png"
-            alt=""
+         
+          <Image
+            src="/images/media/mobile-app-order-p1.png"
+            alt="mobile ordering screenshot"
             className="lazy-img screen-two"
+            width="275"
+            height="533"
           />
-          <img
-            src="images/shape/shape_139.svg"
-            alt=""
+          <Image
+            src="/images/shape/shape_139.svg"
+            alt="custom shape"
             className="lazy-img shapes shape-one"
+            width="80"
+            height="80"
           />
-          <img
-            src="images/shape/shape_140.svg"
-            alt=""
+          <Image
+            src="/images/shape/shape_140.svg"
+            alt="custom shape"
             className="lazy-img shapes shape-two"
+            width="100"
+            height="100"
           />
         </div>{" "}
         {/* /.illustration-holder */}
