@@ -86,7 +86,6 @@ const CannaLife = () => {
       </div>
 
 
-
       {/* /.fancy-feature-thirtyFive */}
       {/* 
 			=============================================
@@ -100,8 +99,7 @@ const CannaLife = () => {
               <div className="col-lg-6">
                 <div
                   className="title-style-one text-center text-lg-start mb-40 md-mb-20"
-                  data-aos="fade-right"
-                >
+                  data-aos="fade-right">
                   <h2 className="main-title fw-500 tx-dark m0">
                       Cannabis Products
                   </h2>
