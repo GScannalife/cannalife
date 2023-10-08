@@ -31,7 +31,7 @@ const AppBanner = () => {
             </h2>
           </div>
           <p className="fs-20 pt-30 pb-30 lg-pb-20">
-          Pick the best time for you to pickup your products and we'll have them ready.
+          Pick the best time for you to pickup your products and we&apos;ll have them ready.
           </p>
           <ul className="style-none list-item">
             {features.map((feature, index) => (
