@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
+  const [notification, setNotification] = useState(null);
+  const recaptchaRef = useRef();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -8,27 +12,34 @@ const ContactForm = () => {
     const email = event.target.email.value;
     const message = event.target.message.value;
 
+    const token = await recaptchaRef.current.executeAsync();
+    recaptchaRef.current.reset();
+
     try {
       const response = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, recaptchaToken: token }),
       });
 
       if (response.ok) {
-        console.log('Email sent');
-        // You can also add a notification or reset the form here if needed.
+        setNotification("Email successfully sent!");
       } else {
-        console.error('Error sending email');
+        setNotification("Error sending email.");
       }
     } catch (error) {
-      console.error('There was an error sending the email', error);
+      setNotification("Error sending email.");
     }
   };
 
   return (
+    <div>
+      {notification && <div>{notification}</div>}
+
+
+
     <div className="form-style-one" data-aos="fade-up">
       <form onSubmit={handleSubmit}>
         <div className="messages" />
@@ -83,8 +94,15 @@ const ContactForm = () => {
           {/* End .col-12 */}
         </div>
         {/* End .row */}
+        <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey="6LfIZYsnAAAAAEGYUS93Ugn-_mXssjMcKQV7_47Y"
+      />
+      
       </form>
-    </div>
+      
+    </div></div>
   );
 };
 

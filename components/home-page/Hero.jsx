@@ -32,16 +32,16 @@ const Hero1 = () => {
       <Image
         width={487}
         height={649}
-        src="/images/assets/ils_11.png"
+        src="/images/assets/cannabis-hand.png"
         alt="ilustration"
         className="lazy-img illustration-one"
         data-aos="fade-left"
         layout="intrinsic"
       />
       <Image
-        width={537}
-        height={658}
-        src="/images/assets/ils_12.png"
+        width={490}
+        height={622}
+        src="/images/assets/cannabis-building.png"
         alt="ilustration"
         className="lazy-img illustration-two"
         data-aos="fade-right"

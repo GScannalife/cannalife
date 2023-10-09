@@ -1,19 +1,30 @@
-// pages/api/sendEmail.js
-
 import sgMail from '@sendgrid/mail';
+import fetch from 'node-fetch';
 
 export default async (req, res) => {
   if (req.method === 'POST') {
-    const { name, email, message } = req.body;
+    const { name, email, message, recaptchaToken } = req.body;
+
+    // Verify reCAPTCHA token
+    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=YOUR_RECAPTCHA_V3_SECRET_KEY&response=${recaptchaToken}`;
+    const recaptchaResponse = await fetch(verificationURL, {
+      method: 'POST',
+    });
+    const recaptchaData = await recaptchaResponse.json();
+
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      res.status(400).send('reCAPTCHA verification failed.');
+      return;
+    }
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    console.log("Request body:", req.body);
-    console.log("API", process.env.SENDGRID_API_KEY);
+
     const msg = {
       to: 'info@cannalifenj.com',
-      from: email,
-      subject: `New message from ${name}`,
+      from: 'info@cannalifenj.com',
+      subject: `New message from ${name} - ${email}`,
       text: message,
+      email,
     };
 
     try {
