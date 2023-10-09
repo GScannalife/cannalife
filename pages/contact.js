@@ -9,7 +9,9 @@ import DefaulHeader from "../components/header/DefaulHeader";
 const contact = () => {
   return (
     <>
-      <Seo pageTitle="Contact Us" />
+      <Seo pageTitle="Contact Us" description={"Your feedback and inquiries are invaluable to us. Connect with our dedicated team for any questions or insights. We're committed to ensuring your experience is as great as our products."} />
+      
+      
       {/* <!-- 
       =============================================
       Theme Default Menu
@@ -30,7 +32,7 @@ const contact = () => {
                 <div className="sc-title-two fst-italic position-relative d-inline-block">
                   Contact info
                 </div>
-                <h2 className="main-title fw-500 tx-dark">Get in Touch.</h2>
+                <h2 className="main-title fw-500 tx-dark">Get in Touch</h2>
               </div>
             </div>
           </div>
@@ -60,7 +62,7 @@ const contact = () => {
           <div className="row">
             <div className="col-lg-8 col-md-9 m-auto">
               <h2 className="tx-dark text-center mt-100 mb-80 lg-mt-40 lg-mb-40 wow fadeInUp">
-                Send a Message.
+                Send a Message
               </h2>
             </div>
             <div className="col-xl-11 m-auto">

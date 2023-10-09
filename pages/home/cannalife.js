@@ -18,7 +18,7 @@ import WhyChoose from "../../components/home-page/WhyChoose";
 const CannaLife = () => {
   return (
     <>
-      <Seo pageTitle="NJ Premium Cannabis Cultivator & Dispensary" description={"Upcoming cannabis cultivator and dispensary located in Northern NJ. We provide premium cannabis products at affordable prices. Locally owned."} keywords={"cannabis nj, premium cannabis, north jersey dispensary"} />
+      <Seo pageTitle="NJ Premium Cannabis" description={"Upcoming cannabis cultivator and dispensary located in Northern NJ. We provide premium cannabis products at affordable prices. Locally owned."} keywords={"cannabis nj, premium cannabis, north jersey dispensary"} />
 
       {/* <!-- Header --> */}
       <DefaulHeader />
@@ -138,8 +138,7 @@ const CannaLife = () => {
           <div className="row">
             <div
               className="col-lg-6 ms-auto order-lg-last"
-              data-aos="fade-left"
-            >
+              data-aos="fade-left">
               <div className="ps-lg-5 ms-xxl-3">
                 <div className="title-style-one mb-40">
                   <div className="sc-title text-uppercase">Trust.</div>
