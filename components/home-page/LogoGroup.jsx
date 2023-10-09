@@ -17,7 +17,7 @@ const LogoGroup = () => {
           key={index}
         >
           <a href={logo.url} target="_blank" rel="noopener noreferrer">
-            <img class="social-media-fix" src={`/images/logo/${logo.image}`} alt="logo" className="lazy-img" />
+            <img src={`/images/logo/${logo.image}`} alt="logo" className="lazy-img social-media-fix" />
           </a>
         </div>
       ))}
