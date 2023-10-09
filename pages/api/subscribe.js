@@ -1,8 +1,4 @@
-// pages/api/addToList.js
-
-import sgMail from '@sendgrid/mail';
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import axios from 'axios';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,21 +8,25 @@ export default async function handler(req, res) {
   const { email } = req.body;
 
   try {
-    // Add the contact to SendGrid
-    const response = await sgMail.post('https://api.sendgrid.com/v3/marketing/contacts', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        list_ids: process.env.SENDGRID_MAILING_ID,
+    const response = await axios.post(
+      'https://api.sendgrid.com/v3/marketing/contacts',
+      {
+        list_ids: [process.env.SENDGRID_MAILING_ID],  // Ensure this is an array
         contacts: [{
           email,
+          // ... other contact properties if needed
         }]
-      }),
-    });
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`
+        }
+      }
+    );
 
     // Check for successful response
-    if (response.statusCode >= 400) {
+    if (response.status !== 202) { // SendGrid returns 202 Accepted for this endpoint on success
       return res.status(500).json({ error: 'Failed to add contact to list.' });
     }
 
