@@ -39,12 +39,12 @@ const Service = () => {
             </div>
             <p className="fs-20 m0 pt-20"></p>
             <h4 className="tx-dark">{service.title}</h4>
-{/*             <Link
+            <Link
               href="#"
               className="read-more rounded-circle text-start tran3s"
             >
               <i className="bi bi-arrow-right" />
-            </Link> */}
+            </Link>
           </div>{" "}
           {/* /.card-style-sixteen */}
         </div>
