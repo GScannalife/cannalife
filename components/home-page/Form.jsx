@@ -1,76 +1,42 @@
-import { useState, useRef } from 'react';
-import Confetti from 'react-confetti';
+import React, { useState } from "react";
+import axios from 'axios';  // Import axios
 
-export default function NewsLetterSignUpForm() {
-  const inputRef = useRef(null);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [userExistsMessage, setUserExistsMessage] = useState(false);
+const Form = () => {
+  const [email, setEmail] = useState("");
 
-  const subscribeUser = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    const res = await fetch('/api/subscribeUser', {
-      body: JSON.stringify({
-        email: inputRef.current.value,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    });
+    try {
+      const response = await axios.post("/api/subscribe", {  // Using axios.post
+        email: email,
+        // You can add more fields here if needed, like first_name and last_name
+      });
 
-    const data = await res.json(); // Retrieve the JSON data from the response
-
-    if (res.status === 200 || res.status === 201) {
-        setShowConfetti(true);
-        setShowSuccessMessage(true);
-
-        setTimeout(() => {
-          setShowConfetti(false);
-        }, 3000);
-    } else if (res.status === 400 && data.error === "User already exists") {
-        setUserExistsMessage(true);
-     
+      if (response.status === 200) {
+        // Handle successful addition to SendGrid list, maybe show a success message
+      } else {
+        console.error("Subscription error:", response.data.error);
+      }
+    } catch (error) {
+      console.error("There was an error:", error);
     }
-    console.log(res.status)
-    console.log(data.error)
   };
 
   return (
-    <div>
-      {/* Show confetti */}
-      {showConfetti && <Confetti />}
-
-      <form onSubmit={subscribeUser}>
-        <input
-          type="email"
-          id="email-input"
-          name="email"
-          placeholder="your best email"
-          ref={inputRef}
-          required
-          autoCapitalize="off"
-          autoCorrect="off"
-        />
-        <button type="submit" className="tran3s position-absolute" name='subscribe'>
-          Subscribe
-        </button>
-      </form>
-
-      {/* Success notification */}
-      {showSuccessMessage && (
-        <div style={{ marginTop: '15px', color: 'green' }}>
-          Successfully subscribed! 🎉
-        </div>
-      )}
-
-      {/* User exists notification */}
-      {userExistsMessage && (
-        <div style={{ marginTop: '15px', color: 'red' }}>
-          This email is already subscribed!
-        </div>
-      )}
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        placeholder="Email address"
+        required
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <button type="submit" className="tran3s position-absolute">
+        Subscribe
+      </button>
+    </form>
   );
-}
+};
+
+export default Form;
