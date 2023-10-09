@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   try {
     // Add the contact to SendGrid
-    const response = await sgMail.put('https://api.sendgrid.com/v3/marketing/contacts', {
+    const response = await sgMail.post('https://api.sendgrid.com/v3/marketing/contacts', {
       headers: {
         'Content-Type': 'application/json',
       },
