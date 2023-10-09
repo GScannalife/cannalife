@@ -94,11 +94,13 @@ const ContactForm = () => {
           {/* End .col-12 */}
         </div>
         {/* End .row */}
+        <div className='hide-everything'>
         <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey="6LfIZYsnAAAAAEGYUS93Ugn-_mXssjMcKQV7_47Y"
-      />
+        sitekey="6LfIZYsnAAAAAEGYUS93Ugn-_mXssjMcKQV7_4
+        7Y"
+      /></div>
       
       </form>
       
