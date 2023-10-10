@@ -24,7 +24,6 @@ export default async (req, res) => {
       from: 'info@cannalifenj.com',
       subject: `New message from ${name} - ${email}`,
       text: message,
-      email,
     };
 
     try {
