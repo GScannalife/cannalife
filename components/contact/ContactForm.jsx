@@ -92,6 +92,7 @@ const ContactForm = () => {
             </button>
           </div>
           {/* End .col-12 */}
+          
         </div>
         {/* End .row */}
         <div className='hide-everything'>
