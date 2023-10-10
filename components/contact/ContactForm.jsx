@@ -98,9 +98,7 @@ const ContactForm = () => {
         <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
-        sitekey="6LfIZYsnAAAAAEGYUS93Ugn-_mXssjMcKQV7_4
-        7Y"
-      /></div>
+        sitekey="6LfIZYsnAAAAAEGYUS93Ugn-_mXssjMcKQV7_47Y" /></div>
       
       </form>
       

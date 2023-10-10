@@ -6,7 +6,7 @@ export default async (req, res) => {
     const { name, email, message, recaptchaToken } = req.body;
 
     // Verify reCAPTCHA token
-    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=YOUR_RECAPTCHA_V3_SECRET_KEY&response=${recaptchaToken}`;
+    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_V3_SECRET_KEY}&response=${recaptchaToken}`;
     const recaptchaResponse = await fetch(verificationURL, {
       method: 'POST',
     });
