@@ -31,8 +31,12 @@ async function verifyRecaptcha(recaptchaToken) {
   });
   const recaptchaData = await recaptchaResponse.json();
 
+  // Log the reCAPTCHA response
+  console.log('reCAPTCHA response:', recaptchaData);
+
   if (!recaptchaData.success || recaptchaData.score < 0.5) {
     throw new Error("reCAPTCHA verification failed");
+    
   }
 }
 
