@@ -45,13 +45,14 @@ const ContactForm = () => {
 
   return (
     <div>
-      {showConfetti && <Confetti />}
-      {isLoading && <div>Loading...</div>} 
+      
+      {isLoading && <div>Sending...</div>} 
       {notification && <div>{notification}</div>}
 
 
 
     <div className="form-style-one" data-aos="fade-up">
+    {showConfetti && <Confetti />}
       <form onSubmit={handleSubmit}>
         <div className="messages" />
         <div className="row controls">
