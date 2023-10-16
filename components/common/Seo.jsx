@@ -15,8 +15,8 @@ const Seo = ({ pageTitle, description, keywords }) => (
     </Head>
 
     {/* Google Tag Manager scripts using Next Script */}
-    <Script src="https://www.googletagmanager.com/gtag/js?id=G-40ETLJE1T6" strategy="afterInteractive" />
-    <Script strategy="afterInteractive">
+    <Script id="gtag-link" src="https://www.googletagmanager.com/gtag/js?id=G-40ETLJE1T6" strategy="afterInteractive" />
+    <Script id="gtag-data" strategy="afterInteractive">
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
