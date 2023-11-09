@@ -39,10 +39,16 @@ const Seo = ({ pageTitle, description, keywords }) => {
         <meta name="robots" content="index, follow" />
 
         {/* Add structured data for rich results */}
-        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        ></script>
 
         {/* Add Schema Markup */}
-        <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+        ></script>
       </Head>
 
       {/* Google Tag Manager scripts using Next Script */}
