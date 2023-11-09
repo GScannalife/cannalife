@@ -11,22 +11,6 @@ const Seo = ({ pageTitle, description, keywords }) => {
     "logo": "https://cannalifenj.com/images/cannalife-icon.png",
   };
 
-  const schemaMarkup = {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "CannaLife",
-    "url": "https://cannalifenj.com/", // Replace with your website URL
-    "description": description,
-    "publisher": {
-      "@type": "Organization",
-      "name": "CannaLife",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://cannalifenj.com/images/cannalife-icon.png", // Replace with your logo URL
-      },
-    },
-  };
-
   return (
     <>
       <Head>
@@ -41,8 +25,7 @@ const Seo = ({ pageTitle, description, keywords }) => {
         {/* Add structured data for rich results */}
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
 
-        {/* Add Schema Markup */}
-        <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
+     
       </Head>
 
       {/* Google Tag Manager scripts using Next Script */}
