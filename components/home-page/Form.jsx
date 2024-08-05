@@ -24,7 +24,7 @@ export default function NewsLetterSignUpForm() {
 
       const data = await res.json();
 
-      if (res.status === 200) {
+      if (res.ok) {
         setShowConfetti(true);
         setShowSuccessMessage(true);
         setUserExistsMessage(false);
@@ -55,7 +55,6 @@ export default function NewsLetterSignUpForm() {
 
   return (
     <div>
-      {/* Show confetti */}
       {showConfetti && <Confetti />}
 
       <form onSubmit={subscribeUser}>
@@ -74,21 +73,18 @@ export default function NewsLetterSignUpForm() {
         </button>
       </form>
 
-      {/* Success notification */}
       {showSuccessMessage && (
         <div style={{ marginTop: '15px', color: 'green' }}>
           Successfully subscribed! 🎉
         </div>
       )}
 
-      {/* User exists notification */}
       {userExistsMessage && (
         <div style={{ marginTop: '15px', color: 'red' }}>
           This email is already subscribed!
         </div>
       )}
 
-      {/* Error notification */}
       {showErrorMessage && (
         <div style={{ marginTop: '15px', color: 'red' }}>
           An error occurred. Please try again later.
