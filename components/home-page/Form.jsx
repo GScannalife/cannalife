@@ -6,35 +6,51 @@ export default function NewsLetterSignUpForm() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [userExistsMessage, setUserExistsMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const subscribeUser = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/subscribe', {
-      body: JSON.stringify({
-        email: inputRef.current.value,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    });
+    try {
+      const res = await fetch('/api/subscribe', {
+        body: JSON.stringify({
+          email: inputRef.current.value,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
 
-    const data = await res.json(); // Retrieve the JSON data from the response
+      const data = await res.json(); // Retrieve the JSON data from the response
 
-    if (res.status === 200 || res.status === 201) {
+      if (res.status === 200) {
         setShowConfetti(true);
         setShowSuccessMessage(true);
+        setUserExistsMessage(false);
+        setShowErrorMessage(false);
 
         setTimeout(() => {
           setShowConfetti(false);
         }, 3000);
-    } else if (res.status === 400 && data.error === "User already exists") {
+      } else if (res.status === 400 && data.error === "User already exists") {
         setUserExistsMessage(true);
-     
+        setShowSuccessMessage(false);
+        setShowErrorMessage(false);
+      } else {
+        setShowErrorMessage(true);
+        setShowSuccessMessage(false);
+        setUserExistsMessage(false);
+      }
+
+      console.log(res.status);
+      console.log(data.error);
+    } catch (error) {
+      console.error('Error subscribing user:', error);
+      setShowErrorMessage(true);
+      setShowSuccessMessage(false);
+      setUserExistsMessage(false);
     }
-    console.log(res.status)
-    console.log(data.error)
   };
 
   return (
@@ -69,6 +85,13 @@ export default function NewsLetterSignUpForm() {
       {userExistsMessage && (
         <div style={{ marginTop: '15px', color: 'red' }}>
           This email is already subscribed!
+        </div>
+      )}
+
+      {/* Error notification */}
+      {showErrorMessage && (
+        <div style={{ marginTop: '15px', color: 'red' }}>
+          An error occurred. Please try again later.
         </div>
       )}
     </div>
