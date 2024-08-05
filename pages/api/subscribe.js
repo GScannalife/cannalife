@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   const data = {
     email_address: email,
-    status: 'subscribed', // Use 'pending' for double opt-in
+    status: 'subscribed',
   };
 
   const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
@@ -30,10 +30,23 @@ export default async function handler(req, res) {
     if (response.status === 200 || response.status === 201) {
       res.status(200).json({ success: true });
     } else {
+      console.error('Unexpected response:', response.data);
       res.status(response.status).json({ error: 'Failed to subscribe user.' });
     }
   } catch (error) {
     console.error('Mailchimp subscription error:', error.response?.data || error.message);
-    res.status(500).json({ error: 'An error occurred while subscribing.' });
+
+    if (error.response) {
+      console.error('Status:', error.response.status);
+      console.error('Data:', error.response.data);
+      console.error('Headers:', error.response.headers);
+    }
+
+    // Handle specific Mailchimp errors
+    if (error.response?.data?.title === 'Member Exists') {
+      res.status(400).json({ error: 'User already exists' });
+    } else {
+      res.status(500).json({ error: 'An error occurred while subscribing.' });
+    }
   }
 }
