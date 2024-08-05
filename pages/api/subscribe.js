@@ -2,8 +2,8 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY,
-  server: process.env.MAILCHIMP_SERVER_PREFIX,
+  apiKey: process.env.MAILCHIMP_API_KEY, // Your Mailchimp API key
+  server: process.env.MAILCHIMP_SERVER_PREFIX, // Your Mailchimp server prefix, e.g., 'us9'
 });
 
 export default async function handler(req, res) {
@@ -19,17 +19,21 @@ export default async function handler(req, res) {
 
   const listId = process.env.MAILCHIMP_AUDIENCE_ID;
 
-  // Log environment variables for debugging
-  console.log('Environment Variables:');
-  console.log('API Key:', process.env.MAILCHIMP_API_KEY ? 'Exists' : 'Missing');
-  console.log('Server Prefix:', process.env.MAILCHIMP_SERVER_PREFIX || 'Missing');
+  // Debugging: Log the audience ID
   console.log('Audience ID:', listId || 'Missing');
+
+  if (!listId) {
+    console.error('Missing Audience ID');
+    return res.status(500).json({ error: 'Server configuration error: Missing Audience ID' });
+  }
 
   try {
     const response = await mailchimp.lists.addListMember(listId, {
       email_address: email,
       status: 'subscribed',
     });
+
+    console.log('Mailchimp response:', response);
 
     return res.status(200).json({ success: true, data: response });
   } catch (error) {
