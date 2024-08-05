@@ -19,8 +19,10 @@ export default async function handler(req, res) {
 
   const listId = process.env.MAILCHIMP_AUDIENCE_ID;
 
-  // Debugging: Log the audience ID
+  // Debugging: Log the API URL and Audience ID
   console.log('Audience ID:', listId || 'Missing');
+  console.log('Server Prefix:', process.env.MAILCHIMP_SERVER_PREFIX || 'Missing');
+  console.log('API Key (partial):', process.env.MAILCHIMP_API_KEY ? 'Exists' : 'Missing');
 
   if (!listId) {
     console.error('Missing Audience ID');
