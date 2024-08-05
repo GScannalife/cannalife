@@ -2,8 +2,8 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY,
-  server: process.env.MAILCHIMP_SERVER_PREFIX, // e.g., 'us1'
+  apiKey: process.env.MAILCHIMP_API_KEY, // Ensure this is without the suffix
+  server: process.env.MAILCHIMP_SERVER_PREFIX, // Should match your Mailchimp data center
 });
 
 export default async function handler(req, res) {
@@ -18,10 +18,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
+    const listId = process.env.MAILCHIMP_AUDIENCE_ID;
+    const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX;
+    const apiKey = process.env.MAILCHIMP_API_KEY;
+    
+    // Construct the full URL for debugging purposes
+    const url = `https://${serverPrefix}.api.mailchimp.com/3.0/lists/${listId}/members`;
+
+    // Log the API details to the console for debugging
+    console.log('API URL:', url);
+    console.log('API Key (first 6 characters):', apiKey.slice(0, 6) + '...');
+    console.log('Audience ID:', listId);
+    console.log('Email to subscribe:', email);
+
+    const response = await mailchimp.lists.addListMember(listId, {
       email_address: email,
-      status: 'subscribed', // Use 'pending' for double opt-in if needed
+      status: 'subscribed',
     });
+
+    console.log('Mailchimp response:', response);
 
     return res.status(200).json({ success: true, data: response });
   } catch (error) {
@@ -29,8 +44,9 @@ export default async function handler(req, res) {
 
     if (error.response) {
       const errorData = JSON.parse(error.response.text);
-      if (errorData.title === "Member Exists") {
-        return res.status(400).json({ error: 'User already exists' });
+      console.log('Error details:', errorData);
+      if (errorData.title === "Resource Not Found") {
+        return res.status(404).json({ error: 'The requested resource could not be found.' });
       }
     }
 
