@@ -1,9 +1,15 @@
 // pages/api/subscribe.js
-import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
+import mailchimp from '@mailchimp/mailchimp_marketing';
+
+mailchimp.setConfig({
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER_PREFIX, // Your Mailchimp server prefix, e.g., 'us1'
+});
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).end('Method Not Allowed');
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   const { email } = req.body;
@@ -12,48 +18,28 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
-  const data = {
-    email_address: email,
-    status: 'subscribed', // Use 'pending' for double opt-in if needed
-  };
-
-  const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
-  const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-  const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX;
-
-  // Constructing the correct URL with the server prefix and audience ID
-  const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`;
-
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `apikey ${MAILCHIMP_API_KEY}`,
-  };
-
   try {
-    const response = await axios.post(url, data, { headers });
+    const response = await mailchimp.lists.batchListMembers(process.env.MAILCHIMP_AUDIENCE_ID, {
+      members: [
+        {
+          email_address: email,
+          status: 'subscribed',
+        },
+      ],
+    });
 
-    if (response.status === 200 || response.status === 201) {
-      return res.status(200).json({ success: true });
-    } else {
-      console.error('Unexpected Mailchimp response:', response.data);
-      return res.status(response.status).json({ error: 'Failed to subscribe user.' });
+    if (response.errors.length > 0) {
+      const existingMemberError = response.errors.find(err => err.error.includes("is already a list member"));
+      if (existingMemberError) {
+        return res.status(400).json({ error: 'User already exists' });
+      }
+      console.error('Mailchimp errors:', response.errors);
+      return res.status(500).json({ error: 'Failed to subscribe user.' });
     }
+
+    return res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Mailchimp subscription error:', error.response?.data || error.message);
-
-    if (error.response) {
-      console.error('Status:', error.response.status);
-      console.error('Data:', error.response.data);
-      console.error('Headers:', error.response.headers);
-    } else {
-      console.error('No response received from Mailchimp');
-    }
-
-    // Handle specific Mailchimp errors
-    if (error.response?.data?.title === 'Member Exists') {
-      return res.status(400).json({ error: 'User already exists' });
-    } else {
-      return res.status(500).json({ error: 'An error occurred while subscribing.' });
-    }
+    console.error('Mailchimp subscription error:', error);
+    return res.status(500).json({ error: 'An error occurred while subscribing.' });
   }
 }

@@ -43,8 +43,8 @@ export default function NewsLetterSignUpForm() {
         setUserExistsMessage(false);
       }
 
-      console.log(res.status);
-      console.log(data.error);
+      console.log('Response status:', res.status);
+      console.log('Response error:', data.error);
     } catch (error) {
       console.error('Error subscribing user:', error);
       setShowErrorMessage(true);
