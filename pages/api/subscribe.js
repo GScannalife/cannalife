@@ -1,5 +1,6 @@
 // pages/api/subscribe.js
 import crypto from 'crypto';
+import fetch from 'node-fetch'; // Ensure node-fetch is installed
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,19 +13,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
-  const apiKey = process.env.MAILCHIMP_API_KEY;
-  const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX; // e.g., 'us9'
-  const listId = process.env.MAILCHIMP_AUDIENCE_ID;
+  const MAILCHIMP_API = process.env.MAILCHIMP_API_KEY; // Your API key
+  const MAILCHIMP_SERVER = process.env.MAILCHIMP_SERVER_PREFIX; // e.g., 'us1'
+  const MAILCHIMP_LIST_ID = process.env.MAILCHIMP_AUDIENCE_ID; // Your list ID
 
-  // Create MD5 hash of the email address
-  const subscriberHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+  if (!MAILCHIMP_API || !MAILCHIMP_SERVER || !MAILCHIMP_LIST_ID) {
+    console.error('Missing Mailchimp configuration');
+    return res.status(500).json({ error: 'Server configuration error: Missing Mailchimp configuration' });
+  }
 
-  // Encode API key for basic auth
-  const authString = Buffer.from(`anystring:${apiKey}`).toString('base64');
+  const auth = Buffer.from(`anystring:${MAILCHIMP_API}`).toString('base64');
 
-  const url = `https://${serverPrefix}.api.mailchimp.com/3.0/lists/${listId}/members/${subscriberHash}`;
-
-  const subscriberData = {
+  const subscriber = {
     email_address: email,
     status_if_new: 'subscribed',
     merge_fields: {
@@ -33,23 +33,27 @@ export default async function handler(req, res) {
     },
   };
 
+  const subscriberHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
+
+  const url = `https://${MAILCHIMP_SERVER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members/${subscriberHash}`;
+
   try {
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${authString}`,
+        Authorization: `Basic ${auth}`,
+        Accept: 'application/json',
       },
-      body: JSON.stringify(subscriberData),
+      body: JSON.stringify(subscriber),
     });
 
-    const data = await response.json();
-
     if (response.ok) {
-      return res.status(200).json({ success: true, data });
+      return res.status(200).json({ success: true });
     } else {
-      console.error('Mailchimp API error:', data);
-      return res.status(response.status).json({ error: data.detail || 'Failed to subscribe user.' });
+      const errorData = await response.json();
+      console.error('Mailchimp API error:', errorData);
+      return res.status(response.status).json({ error: errorData.detail || 'Failed to subscribe user.' });
     }
   } catch (error) {
     console.error('Request failed:', error);
