@@ -22,7 +22,7 @@ export default function NewsLetterSignUpForm() {
         }),
       });
 
-      const data = await res.json(); // Retrieve the JSON data from the response
+      const data = await res.json();
 
       if (res.status === 200) {
         setShowConfetti(true);

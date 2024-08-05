@@ -2,8 +2,8 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY, // Your Mailchimp API key
-  server: process.env.MAILCHIMP_SERVER_PREFIX, // Your Mailchimp server prefix, e.g., 'us9'
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER_PREFIX, // Should match your Mailchimp server prefix
 });
 
 export default async function handler(req, res) {
@@ -18,10 +18,6 @@ export default async function handler(req, res) {
   }
 
   const listId = process.env.MAILCHIMP_AUDIENCE_ID;
-
-  console.log('Audience ID:', listId || 'Missing');
-  console.log('Server Prefix:', process.env.MAILCHIMP_SERVER_PREFIX || 'Missing');
-  console.log('API Key (partial):', process.env.MAILCHIMP_API_KEY ? 'Exists' : 'Missing');
 
   if (!listId) {
     console.error('Missing Audience ID');
