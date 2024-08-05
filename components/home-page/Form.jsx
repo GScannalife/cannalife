@@ -19,6 +19,8 @@ export default function NewsLetterSignUpForm() {
         },
         body: JSON.stringify({
           email: inputRef.current.value,
+          firstName: 'FirstName', // Replace with actual first name if available
+          lastName: 'LastName',   // Replace with actual last name if available
         }),
       });
 
