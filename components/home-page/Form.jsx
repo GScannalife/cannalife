@@ -10,7 +10,7 @@ export default function NewsLetterSignUpForm() {
   const subscribeUser = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/subscribeUser', {
+    const res = await fetch('/api/subscribe', {
       body: JSON.stringify({
         email: inputRef.current.value,
       }),
