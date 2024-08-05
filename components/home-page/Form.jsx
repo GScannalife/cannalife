@@ -13,13 +13,13 @@ export default function NewsLetterSignUpForm() {
 
     try {
       const res = await fetch('/api/subscribe', {
-        body: JSON.stringify({
-          email: inputRef.current.value,
-        }),
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        method: 'POST',
+        body: JSON.stringify({
+          email: inputRef.current.value,
+        }),
       });
 
       const data = await res.json(); // Retrieve the JSON data from the response
