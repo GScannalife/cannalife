@@ -48,12 +48,16 @@ export default async function handler(req, res) {
       body: JSON.stringify(subscriber),
     });
 
+    const data = await response.json();
+
     if (response.ok) {
       return res.status(200).json({ success: true });
     } else {
-      const errorData = await response.json();
-      console.error('Mailchimp API error:', errorData);
-      return res.status(response.status).json({ error: errorData.detail || 'Failed to subscribe user.' });
+      console.error('Mailchimp API error:', data);
+      if (data.title === "Member Exists") {
+        return res.status(400).json({ error: 'Your email is already registered.' });
+      }
+      return res.status(response.status).json({ error: data.detail || 'Failed to subscribe user.' });
     }
   } catch (error) {
     console.error('Request failed:', error);

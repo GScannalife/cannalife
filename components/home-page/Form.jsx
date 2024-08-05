@@ -35,7 +35,7 @@ export default function NewsLetterSignUpForm() {
         setTimeout(() => {
           setShowConfetti(false);
         }, 3000);
-      } else if (res.status === 400 && data.error === "User already exists") {
+      } else if (res.status === 400 && data.error === "Your email is already registered.") {
         setUserExistsMessage(true);
         setShowSuccessMessage(false);
         setShowErrorMessage(false);
@@ -83,7 +83,7 @@ export default function NewsLetterSignUpForm() {
 
       {userExistsMessage && (
         <div style={{ marginTop: '15px', color: 'red' }}>
-          This email is already subscribed!
+          Your email is already registered!
         </div>
       )}
 
