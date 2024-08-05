@@ -2,8 +2,8 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY, // Ensure this is without the suffix
-  server: process.env.MAILCHIMP_SERVER_PREFIX, // Should match your Mailchimp data center
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER_PREFIX,
 });
 
 export default async function handler(req, res) {
@@ -17,26 +17,19 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
+  const listId = process.env.MAILCHIMP_AUDIENCE_ID;
+
+  // Log environment variables for debugging
+  console.log('Environment Variables:');
+  console.log('API Key:', process.env.MAILCHIMP_API_KEY ? 'Exists' : 'Missing');
+  console.log('Server Prefix:', process.env.MAILCHIMP_SERVER_PREFIX || 'Missing');
+  console.log('Audience ID:', listId || 'Missing');
+
   try {
-    const listId = process.env.MAILCHIMP_AUDIENCE_ID;
-    const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX;
-    const apiKey = process.env.MAILCHIMP_API_KEY;
-    
-    // Construct the full URL for debugging purposes
-    const url = `https://${serverPrefix}.api.mailchimp.com/3.0/lists/${listId}/members`;
-
-    // Log the API details to the console for debugging
-    console.log('API URL:', url);
-    console.log('API Key (first 6 characters):', apiKey.slice(0, 6) + '...');
-    console.log('Audience ID:', listId);
-    console.log('Email to subscribe:', email);
-
     const response = await mailchimp.lists.addListMember(listId, {
       email_address: email,
       status: 'subscribed',
     });
-
-    console.log('Mailchimp response:', response);
 
     return res.status(200).json({ success: true, data: response });
   } catch (error) {
