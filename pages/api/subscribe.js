@@ -1,6 +1,6 @@
 // pages/api/subscribe.js
 import crypto from 'crypto';
-import fetch from 'node-fetch'; // Ensure node-fetch is installed
+import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -13,9 +13,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
-  const MAILCHIMP_API = process.env.MAILCHIMP_API_KEY; // Your API key
-  const MAILCHIMP_SERVER = process.env.MAILCHIMP_SERVER_PREFIX; // e.g., 'us1'
-  const MAILCHIMP_LIST_ID = process.env.MAILCHIMP_AUDIENCE_ID; // Your list ID
+  const MAILCHIMP_API = process.env.MAILCHIMP_API_KEY;
+  const MAILCHIMP_SERVER = process.env.MAILCHIMP_SERVER_PREFIX;
+  const MAILCHIMP_LIST_ID = process.env.MAILCHIMP_AUDIENCE_ID;
 
   if (!MAILCHIMP_API || !MAILCHIMP_SERVER || !MAILCHIMP_LIST_ID) {
     console.error('Missing Mailchimp configuration');
@@ -24,20 +24,35 @@ export default async function handler(req, res) {
 
   const auth = Buffer.from(`anystring:${MAILCHIMP_API}`).toString('base64');
 
-  const subscriber = {
-    email_address: email,
-    status_if_new: 'subscribed',
-    merge_fields: {
-      FNAME: firstName || '',
-      LNAME: lastName || '',
-    },
-  };
-
+  // Create MD5 hash of the email address
   const subscriberHash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
 
   const url = `https://${MAILCHIMP_SERVER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members/${subscriberHash}`;
 
   try {
+    // Check if the subscriber already exists
+    const checkResponse = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Basic ${auth}`,
+        Accept: 'application/json',
+      },
+    });
+
+    if (checkResponse.status === 200) {
+      // Subscriber already exists
+      return res.status(400).json({ error: 'Your email is already registered.' });
+    }
+
+    const subscriber = {
+      email_address: email,
+      status_if_new: 'subscribed',
+      merge_fields: {
+        FNAME: firstName || '',
+        LNAME: lastName || '',
+      },
+    };
+
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
@@ -54,9 +69,6 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true });
     } else {
       console.error('Mailchimp API error:', data);
-      if (data.title === "Member Exists") {
-        return res.status(400).json({ error: 'Your email is already registered.' });
-      }
       return res.status(response.status).json({ error: data.detail || 'Failed to subscribe user.' });
     }
   } catch (error) {
