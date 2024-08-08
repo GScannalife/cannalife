@@ -63,10 +63,12 @@ const contact = () => {
                 Send a Message.
               </h2>
             </div>
-            <div className="col-xl-11 m-auto">
+            
+{/*             <div className="col-xl-11 m-auto">
               <ContactForm />
-              {/* /.form-style-one */}
-            </div>
+             
+            </div> */}
+             {/* /.form-style-one */}
           </div>
         </div>
         {/* End .container */}
