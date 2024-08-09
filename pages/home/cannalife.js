@@ -13,11 +13,13 @@ import Feature from "../../components/home-page/Feature";
 import Hero from "../../components/home-page/Hero";
 import Service from "../../components/home-page/Service";
 import WhyChoose from "../../components/home-page/WhyChoose";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const CannaLife = () => {
   return (
     <>
+     <SpeedInsights /> {/* Add SpeedInsights component */}
+     
       <Seo pageTitle="NJ Premium Cannabis Cultivator & Dispensary" description={"Upcoming cannabis cultivator and dispensary located in Northern NJ. We provide premium cannabis products at affordable prices. Locally owned."} keywords={"cannabis nj, premium cannabis, north jersey dispensary"} />
 
       {/* <!-- Header --> */}
