@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import MainMenu from "./MainMenu";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router"; // Import useRouter
 
 const DefaulHeader = () => {
   const [navbar, setNavbar] = useState(false);
+  const router = useRouter(); // Initialize the router
 
   const changeBackground = () => {
     if (window.scrollY >= 10) {
@@ -40,28 +42,13 @@ const DefaulHeader = () => {
             </Link>
           </div>
           <div className="right-widget ms-auto d-flex align-items-center order-lg-3">
-
-
-{/*             <Link
-              href="/login"
-              className="login-btn-three rounded-circle tran3s me-3"
-            >
-              <i className="bi bi-person" />
-            </Link> */}
-
-            
-            <Link
-              href="/contact"
-              className="btn-twentyOne fw-500 tran3s d-none d-lg-block"
-            >
-              Contact us
+            <Link href={router.pathname === "/contact" ? "/" : "/contact"}
+              className="btn-twentyOne fw-500 tran3s d-none d-lg-block">
+              {router.pathname === "/contact" ? "Home" : "Contact us"}
             </Link>
-          </div>{" "}
-          {/* /.right-widget */}
+          </div>
           <MainMenu />
-        </div>
-      </div>
-      {/* /.inner-content */}
+        </div>      </div>
     </header>
   );
 };
