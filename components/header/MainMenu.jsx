@@ -1,16 +1,5 @@
 import Link from "next/link";
-import {
-  menuItems,
-  pagesItems,
-  portfolioItems,
-  blogItems,
-} from "../../data/menu";
-import {
-  isActiveLink,
-  isActiveParent,
-  isActiveParentChaild,
-} from "../../utils/linkActiveChecker";
-
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { useRouter } from "next/router";
 
 const MainMenu = () => {
@@ -32,21 +21,53 @@ const MainMenu = () => {
 
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
-          <li className="">
-            <div className="logo">
-              <Link href="/" className="">
-                <img src="/images/logo/cannalife-icon.svg" alt="" width={115}/> 
-              </Link>
-              <br></br>
-              <p><strong>Coming Soon...</strong></p>
-            </div>
+          <li className="nav-item logo">
+            <Link href="/" className="nav-link">
+              <img
+                src="/images/logo/cannalife-icon.svg"
+                alt="logo"
+                width={115}
+              />
+            </Link>
           </li>
-          {/* End li */}
+          {/* End logo item */}
 
-         
+          <li className="nav-item">
+            <Link href="/" className={`nav-link ${router.pathname === '/' ? 'active' : ''}`}>
+              Home
+            </Link>
+          </li>
+          {/* End home link */}
+
+          <li className="nav-item">
+            <Link href="/contact" className={`nav-link ${router.pathname === '/contact' ? 'active' : ''}`}>
+              Contact
+            </Link>
+          </li>
+          {/* End contact link */}
+
+          <li className="nav-item">
+            <a href="https://x.com/yourprofile" className="nav-link" target="_blank" rel="noopener noreferrer">
+              <FaTwitter /> X
+            </a>
+          </li>
+          {/* End X link */}
+
+          <li className="nav-item">
+            <a href="https://instagram.com/yourprofile" className="nav-link" target="_blank" rel="noopener noreferrer">
+              <FaInstagram /> Instagram
+            </a>
+          </li>
+          {/* End Instagram link */}
+
+          <li className="nav-item">
+            <a href="https://facebook.com/yourprofile" className="nav-link" target="_blank" rel="noopener noreferrer">
+              <FaFacebookF /> Facebook
+            </a>
+          </li>
+          {/* End Facebook link */}
         </ul>
-        {/* End ul */}
-
+        {/* End nav */}
       </div>
     </nav>
   );
