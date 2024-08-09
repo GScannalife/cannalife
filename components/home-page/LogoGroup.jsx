@@ -1,32 +1,26 @@
-import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
-import { MessengerIcon } from "react-icons/fa"; // Import Messenger icon if available
-
 const LogoGroup = () => {
   const logoData = [
-    { icon: <FaTwitter />, url: "https://twitter.com/cannalifenj", name: "X" }, // X icon
-    { icon: <FaInstagram />, url: "https://www.instagram.com/cannalifenj", name: "Instagram" },
-    { icon: <FaFacebookF />, url: "https://www.facebook.com/cannalifenj", name: "Facebook" },
-    { icon: <MessengerIcon />, url: "https://m.me/cannalifenj", name: "Messenger" },
-    { icon: <FaGoogle />, url: "#", name: "Google" }, // Replace with appropriate Google icon
-    { icon: <FaEnvelope />, url: "mailto:info@cannalifenj.com", name: "Email" } // Replace with appropriate Email icon
+    { image: "x-logo.svg", url: "https://twitter.com/cannalifenj" }, // Updated to X logo
+    { image: "instagram-logo.svg", url: "https://www.instagram.com/cannalifenj" },
+    { image: "facebook-logo.svg", url: "https://www.facebook.com/cannalifenj" },
+    { image: "messenger-logo.svg", url: "https://m.me/cannalifenj" },
+    { image: "google-logo.svg", url: "#" },
+    { image: "gmail-logo.svg", url: "mailto:info@cannalifenj.com" }
   ];
 
   return (
-    <div className="d-flex flex-wrap justify-content-center align-items-center">
+    <>
       {logoData.map((logo, index) => (
-        <a
-          href={logo.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          className="logo d-flex align-items-center justify-content-center"
           key={index}
-          className="d-flex align-items-center justify-content-center m-2"
-          style={{ fontSize: '24px', color: 'inherit' }}
-          aria-label={logo.name}
         >
-          {logo.icon}
-        </a>
+          <a href={logo.url} target="_blank" rel="noopener noreferrer">
+            <img src={`/images/logo/${logo.image}`} alt="logo" className="lazy-img social-media-fix" />
+          </a>
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 

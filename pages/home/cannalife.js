@@ -14,39 +14,41 @@ import Hero from "../../components/home-page/Hero";
 import Service from "../../components/home-page/Service";
 import WhyChoose from "../../components/home-page/WhyChoose";
 
+
 const CannaLife = () => {
   return (
     <>
-      <Seo
-        pageTitle="NJ Premium Cannabis Cultivator & Dispensary"
-        description="Upcoming cannabis cultivator and dispensary located in Northern NJ. We provide premium cannabis products at affordable prices. Locally owned."
-        keywords="cannabis nj, premium cannabis, north jersey dispensary"
-      />
+      <Seo pageTitle="NJ Premium Cannabis Cultivator & Dispensary" description={"Upcoming cannabis cultivator and dispensary located in Northern NJ. We provide premium cannabis products at affordable prices. Locally owned."} keywords={"cannabis nj, premium cannabis, north jersey dispensary"} />
 
-      {/* Header */}
+      {/* <!-- Header --> */}
       <DefaulHeader />
 
-      {/* Main Banner */}
-      <Hero />
+      {/* <!-- Main Banner --> */}
+      <Hero /> 
 
-      {/* What Sets us Apart */}
+
+     {/* <!-- What Sets us Apart--> */}
       <div className="fancy-feature-thirtyFour mt-200">
         <div className="container">
           <div className="row gx-xxl-5">
-            <div className="text-center">
-              <h1 className="hero-heading fw-500 tx-dark">
-                What Makes Us Unique
-              </h1>
-            </div>
+          <div className="text-center">
+            <h1 class="hero-heading fw-500 tx-dark">What Makes Us Unique</h1>
+           
+     </div>
             <Feature />
+                       
           </div>
         </div>
-        {/* /.container */}
+        {/* <!-- /.container --> */}
       </div>
-      {/* /.fancy-feature-thirtyFour */}
-
-      <CallToActions />
-      <div className="partner-section-two position-relative mt-225 mb-250 md-mt-120 md-mb-120">
+      {/* <!-- /.fancy-feature-thirtyFour --> */}
+      {/*
+			=====================================================
+				Feature Section Thirty Five
+			=====================================================
+			*/}
+<CallToActions />
+<div className="partner-section-two position-relative mt-225 mb-250 md-mt-120 md-mb-120">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-xl-5 col-lg-6" data-data-aos="fade-right">
@@ -58,9 +60,9 @@ const CannaLife = () => {
                   Social Media
                 </h2>
               </div>
+              {/* /.title-style-four */}
               <p className="fs-20 pt-30 pe-xxl-5">
-                Follow for updates, exclusive content, and a behind-the-scenes
-                look at opening a new dispensary in NJ.
+              Follow for updates, exclusive content, and a behind-the-scenes look at opening a new dispensary in NJ.
               </p>
             </div>
           </div>
@@ -75,6 +77,7 @@ const CannaLife = () => {
           alt="logo"
           className="lazy-img shapes shape-one"
         />
+  
         <img
           src="/images/shape/shape_51.svg"
           alt="logo"
@@ -82,8 +85,13 @@ const CannaLife = () => {
         />
       </div>
 
-      {/* /.fancy-feature-thirtyFive */}
 
+      {/* /.fancy-feature-thirtyFive */}
+      {/* 
+			=============================================
+				Feature Section Thirty Six
+			============================================== 
+			*/}
       <div className="fancy-feature-thirtySix mt-190 lg-mt-140">
         <div className="container">
           <div className="wrapper position-relative">
@@ -91,10 +99,9 @@ const CannaLife = () => {
               <div className="col-lg-6">
                 <div
                   className="title-style-one text-center text-lg-start mb-40 md-mb-20"
-                  data-aos="fade-right"
-                >
+                  data-aos="fade-right">
                   <h2 className="main-title fw-500 tx-dark m0">
-                    Cannabis Products
+                      Cannabis Products
                   </h2>
                 </div>
               </div>
@@ -102,32 +109,62 @@ const CannaLife = () => {
             <div className="row">
               <Service />
             </div>
+            {/* /.row */}
+
+            {/* 
+            <div className="text-center md-mt-50">
+              <Link
+                href="/pages-menu/service-v1"
+                className="btn-twentyTwo fw-500 tran3s"
+                data-aos="fade-left"
+              >
+                View All Products
+              </Link>
+            </div> */}
+
+
           </div>
         </div>
+        {/* /.container */}
       </div>
-
+      {/* /.fancy-feature-thirtySix */}
+      {/* 
+			=============================================
+				Feature Section Thirty Seven
+			============================================== 
+			*/}
       <div className="fancy-feature-thirtySeven mt-225 lg-mt-120">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 ms-auto order-lg-last" data-aos="fade-left">
+            <div
+              className="col-lg-6 ms-auto order-lg-last"
+              data-aos="fade-left"
+            >
               <div className="ps-lg-5 ms-xxl-3">
                 <div className="title-style-one mb-40">
                   <div className="sc-title text-uppercase">Trust.</div>
-                  <h2 className="main-title fw-500 tx-dark m0">Why Us?</h2>
+                  <h2 className="main-title fw-500 tx-dark m0">
+                  Why Us?
+                  </h2>
                 </div>
                 <WhyChoose />
+                {/* /.accordion-style-five */}
               </div>
             </div>
+            {/* End .col-6 */}
 
             <div className="col-xxl-5 col-lg-6 order-lg-first">
               <Block />
             </div>
           </div>
         </div>
+        {/* /.container */}
       </div>
 
       <HowToStartBlock />
       <div className="fancy-feature-twenty mt-3 lg-mt-20">
+
+
         <div className="wrapper mt-60 lg-mt-10">
           <div className="container">
             <div className="row justify-content-center">
@@ -135,17 +172,28 @@ const CannaLife = () => {
             </div>
           </div>
         </div>
+        {/* /.wrapper */}
       </div>
 
+  
       <div className="fancy-feature-thirtyEight mt-140 lg-mt-100">
         <div className="container">
           <AppBanner />
         </div>
+        {/* /.container */}
       </div>
+      {/* /.fancy-feature-thirtyEight */}
+     
+      {/*
+			=====================================================
+				Footer
+			=====================================================
+			*/}
 
-      <div className="footer-style-nine theme-basic-footer zn2 position-relative">
-        <CopyrightFooter />
-      </div>
+<div class="footer-style-nine theme-basic-footer zn2 position-relative">
+<CopyrightFooter /></div>
+   
+      {/* /.footer-style-ten */}
     </>
   );
 };
