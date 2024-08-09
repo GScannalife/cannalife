@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaXTwitter, FaFacebookF } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { RiMessengerLine } from "react-icons/ri"; // Import Messenger icon
 
 const MainMenu = () => {
   const router = useRouter();
@@ -54,61 +55,37 @@ const MainMenu = () => {
           </li>
           {/* End contact link */}
 
-          <li className="nav-item">
+          <li className="nav-item d-flex justify-content-around mt-3">
             <a
               href="https://twitter.com/cannalifenj"
               className="nav-link"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ fontSize: '24px', padding: '10px' }} // Increase size and padding for better pressability
+              aria-label="X"
             >
-              <FaTwitter /> X
+              <FaXTwitter />
             </a>
-          </li>
-          {/* End X link */}
-
-          <li className="nav-item">
             <a
-              href="https://www.instagram.com/cannalifenj"
+              href="https://www.facebook.com/cannalifenj"
               className="nav-link"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ fontSize: '24px', padding: '10px' }} // Increase size and padding for better pressability
+              aria-label="Facebook"
             >
-              <FaInstagram /> Instagram
+              <FaFacebookF />
             </a>
-          </li>
-          {/* End Instagram link */}
-
-          <li className="nav-item">
-            <a
-              href="https://cannalifenj.com/images/logo/facebook-logo.svg"
-              className="nav-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/logo/facebook-logo.svg"
-                alt="Facebook"
-                style={{ width: 20, height: 20, marginRight: 8 }}
-              />
-              Facebook
-            </a>
-          </li>
-          {/* End Facebook link */}
-
-          <li className="nav-item">
             <a
               href="fb-messenger://user-thread/100000123456789" // Replace with your actual Messenger ID
               className="nav-link"
+              style={{ fontSize: '24px', padding: '10px' }} // Increase size and padding for better pressability
+              aria-label="Messenger"
             >
-              <img
-                src="/images/logo/messenger-logo.svg"
-                alt="Messenger"
-                style={{ width: 20, height: 20, marginRight: 8 }}
-              />
-              Messenger
+              <RiMessengerLine />
             </a>
           </li>
-          {/* End Messenger link */}
+          {/* End social media links */}
         </ul>
         {/* End nav */}
       </div>
