@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { FaXTwitter, FaFacebookF } from "react-icons/fa";
-import {FaXTwitter} from 'react-icons/fa6';
-import { useRouter } from "next/router";
+import { FaTwitter, FaFacebookF } from "react-icons/fa";
 import { RiMessengerLine } from "react-icons/ri"; // Import Messenger icon
+import { useRouter } from "next/router";
 
 const MainMenu = () => {
   const router = useRouter();
@@ -65,7 +64,7 @@ const MainMenu = () => {
               style={{ fontSize: '24px', padding: '10px' }} // Increase size and padding for better pressability
               aria-label="X"
             >
-              <FaXTwitter />
+              <FaTwitter />
             </a>
             <a
               href="https://www.facebook.com/cannalifenj"
