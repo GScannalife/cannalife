@@ -77,7 +77,7 @@ const MainMenu = () => {
               <FaFacebookF />
             </a>
             <a
-              href="fb-messenger://user-thread/100000123456789" // Replace with your actual Messenger ID
+              href="https://m.me/cannalifenj" // Replace with your actual Messenger ID
               className="nav-link"
               style={{ fontSize: '24px', padding: '10px' }} // Increase size and padding for better pressability
               aria-label="Messenger"
