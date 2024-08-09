@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaXTwitter, FaFacebookF } from "react-icons/fa";
+import {FaXTwitter} from 'react-icons/fa6';
 import { useRouter } from "next/router";
 import { RiMessengerLine } from "react-icons/ri"; // Import Messenger icon
 
