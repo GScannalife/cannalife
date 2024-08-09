@@ -1,17 +1,16 @@
 import sgMail from '@sendgrid/mail';
 
-export default async (req, res) => {
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// Define the email sending handler function
+const sendEmailHandler = async (req, res) => {
   if (req.method === 'POST') {
     const { name, email, message } = req.body;
-
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
     const msg = {
       to: 'info@cannalifenj.com',
       from: 'info@cannalifenj.com',
       subject: `New message from ${name} - ${email}`,
       text: message,
-      email,
     };
 
     try {
@@ -25,3 +24,6 @@ export default async (req, res) => {
     res.status(405).send('Method not allowed');
   }
 };
+
+// Export the handler function
+export default sendEmailHandler;

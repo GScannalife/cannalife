@@ -1,3 +1,4 @@
+// Import statements
 import Seo from "../components/common/Seo";
 import BlockContact from "../components/contact/BlockContact";
 import ContactForm from "../components/contact/ContactForm";
@@ -5,6 +6,7 @@ import Map from "../components/contact/Map";
 import DefaultFooter from "../components/footer/DefaultFooter";
 import CopyrightFooter from "../components/home-page/CopyrightFooter";
 import DefaulHeader from "../components/header/DefaulHeader";
+import Image from "next/image"; // Import Image component
 
 const contact = () => {
   return (
@@ -36,10 +38,13 @@ const contact = () => {
           </div>
         </div>
         {/* /.container */}
-        <img
+        <Image
           src="/images/shape/shape_172.svg"
           alt="shape"
           className="lazy-img shapes shape-two"
+          width={300} // Adjust the width and height according to your design
+          height={200}
+          layout="responsive"
         />
       </div>
 
@@ -81,7 +86,7 @@ const contact = () => {
         Contact Section One
         ============================================== 
         */}
-  <div class="footer-style-nine theme-basic-footer zn2 position-relative">
+  <div className="footer-style-nine theme-basic-footer zn2 position-relative">
 <CopyrightFooter /></div>
     </>
   );
