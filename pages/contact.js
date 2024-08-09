@@ -58,17 +58,17 @@ const contact = () => {
 
         <div className="container">
           <div className="row">
-            {/*    
+          
             <div className="col-lg-8 col-md-9 m-auto">
               <h2 className="tx-dark text-center mt-100 mb-80 lg-mt-40 lg-mb-40 wow fadeInUp">
                 Send a Message.
               </h2>
-            </div>*/}
+            </div>
             
-{/*             <div className="col-xl-11 m-auto">
+            <div className="col-xl-11 m-auto">
               <ContactForm />
              
-            </div> */}
+            </div> 
              {/* /.form-style-one */}
           </div>
         </div>
